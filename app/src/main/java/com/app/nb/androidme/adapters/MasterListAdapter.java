@@ -35,24 +35,20 @@ public class MasterListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MasterListAdapter.ViewHolder holder = null;
+        ImageView imageView;
 
         if (convertView == null) { // If the view is not recycled, this creates a new ImageView to hold an image
-            holder = new MasterListAdapter.ViewHolder();
-            holder.imageView = new ImageView(context);
+            imageView = new ImageView(context);
             // define layout parameters
-            holder.imageView.setAdjustViewBounds(true);
-            holder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            holder.imageView.setPadding(8, 8, 8, 8);
+            imageView.setAdjustViewBounds(true);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setPadding(8, 8, 8, 8);
         } else {
-            holder.imageView = (ImageView) convertView;
+            imageView = (ImageView) convertView;
         }
         //set the image result and return the newly created ImageView
-        holder.imageView.setImageResource(mImagesIds.get(position));
-        return holder.imageView;
+        imageView.setImageResource(mImagesIds.get(position));
+        return imageView;
     }
 
-    class ViewHolder {
-        private ImageView imageView;
-    }
 }

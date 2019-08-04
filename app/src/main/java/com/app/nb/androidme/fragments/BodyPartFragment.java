@@ -32,8 +32,10 @@ public class BodyPartFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         // Carga el estado guardado (la lista de imagenes y el index) si lo hay
-        mImagesIds = savedInstanceState.getIntegerArrayList(IMAGE_ID_LIST);
-        mListImageIndex = savedInstanceState.getInt(LIST_INDEX);
+        if (savedInstanceState != null) {
+            mImagesIds = savedInstanceState.getIntegerArrayList(IMAGE_ID_LIST);
+            mListImageIndex = savedInstanceState.getInt(LIST_INDEX);
+        }
 
         // Inflate the layout
         View view = inflater.inflate(R.layout.fragment_body_part, container, false);
