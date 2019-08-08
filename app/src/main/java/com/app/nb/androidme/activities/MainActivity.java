@@ -10,6 +10,10 @@ import com.app.nb.androidme.fragments.BodyPartFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int headIndex;
+    private int bodyIndex;
+    private int legIndex;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,25 +21,32 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
 
-            //Establece la lista de cabezas y el indice de la imagen a mostrar
-            BodyPartFragment headFragment = new BodyPartFragment();
-            headFragment.setmImagesIds(ImageAssetsManager.getHeads());
-            headFragment.setmListImageIndex(1);
+            Bundle bundle = getIntent().getExtras();
+            if (bundle != null) {
+                headIndex = bundle.getInt("headIndex");
+                bodyIndex = bundle.getInt("bodyIndex");
+                legIndex = bundle.getInt("legIndex");
 
-            BodyPartFragment bodyFragment = new BodyPartFragment();
-            bodyFragment.setmImagesIds(ImageAssetsManager.getBodies());
-            bodyFragment.setmListImageIndex(1);
+                //Establece la lista de cabezas y el indice de la imagen a mostrar
+                BodyPartFragment headFragment = new BodyPartFragment();
+                headFragment.setmImagesIds(ImageAssetsManager.getHeads());
+                headFragment.setmListImageIndex(headIndex);
 
-            BodyPartFragment legFragment = new BodyPartFragment();
-            legFragment.setmImagesIds(ImageAssetsManager.getLegs());
-            legFragment.setmListImageIndex(1);
+                BodyPartFragment bodyFragment = new BodyPartFragment();
+                bodyFragment.setmImagesIds(ImageAssetsManager.getBodies());
+                bodyFragment.setmListImageIndex(bodyIndex);
 
-            FragmentManager fragmentManager = getSupportFragmentManager();
+                BodyPartFragment legFragment = new BodyPartFragment();
+                legFragment.setmImagesIds(ImageAssetsManager.getLegs());
+                legFragment.setmListImageIndex(legIndex);
 
-            //Fragment transaction
-            fragmentManager.beginTransaction().add(R.id.head_container, headFragment).commit();
-            fragmentManager.beginTransaction().add(R.id.body_container, bodyFragment).commit();
-            fragmentManager.beginTransaction().add(R.id.leg_container, legFragment).commit();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+
+                //Fragment transaction
+                fragmentManager.beginTransaction().add(R.id.head_container, headFragment).commit();
+                fragmentManager.beginTransaction().add(R.id.body_container, bodyFragment).commit();
+                fragmentManager.beginTransaction().add(R.id.leg_container, legFragment).commit();
+            }
         }
     }
 }
